@@ -35,5 +35,5 @@ spec:
             command:
             - "/bin/sh"
             - "-c"
-            - "create-foreign-aliases.sh"
+            - "/jobs/create-foreign-aliases.sh"
           restartPolicy: Never
