@@ -12,3 +12,5 @@ plugins:
     mark_after: 7
     close_after: 3
     label: rotten
+  foreignAliases:
+    project: devops/jx3-pipeline-catalog
