@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: close-rotten
+spec:
+  schedule: "0 18 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: close-rotten
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            env:
+            - name: GITLAB_BASE_URL
+              value: {{ .Values.gitlab.url }}
+            - name: GITLAB_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.gitlab.secret }}
+                  key: token
+            - name: CLOSE_AFTER
+              value: {{ .Values.plugins.rotten.close_after }}
+            - name: ROTTEN_LABEL
+              value: {{ .Values.plugins.rotten.label }}
+            - name: PROJECTS
+              value: {{ .Values.projects | join "," }}
+            command: /jobs/mark-rotten.py
+          restartPolicy: Never

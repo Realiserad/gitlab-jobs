@@ -1,0 +1,31 @@
+name: Release
+on:
+  push:
+    branches:
+    - main
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+        contents: read
+        packages: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ghcr.io/realiserad/gitlab-jobs:latest
+    - uses: bsord/helm-push@v4.1.0
+      with:
+        useOCIRegistry: true
+        registry-url:  oci://ghcr.io/realiserad/charts
+        username: ${{ github.actor }}
+        access-token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
+        chart-folder: chart

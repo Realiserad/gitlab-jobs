@@ -1,0 +1,14 @@
+image:
+  repository: ghcr.io/realiserad/gitlab-jobs
+  tag: latest
+  pullPolicy: IfNotPresent
+gitlab:
+  url: https://gitlab.company.com
+  secret: gitlab-api
+projects:
+- devops/jx3
+plugins:
+  rotten:
+    mark_after: 7
+    close_after: 3
+    label: rotten
