@@ -3,7 +3,7 @@
 set -e
 
 echo "👷 Collecting foreign aliases from GitLab..."
-./create-owners-aliases.py
+/jobs/create-foreign-aliases.py
 
 echo "🐑 Cloning $PROJECT..."
 GIT_CLONE_URI="https://$COMMITTER_NAME:$GITLAB_API_TOKEN@$(echo "$GITLAB_BASE_URL" | sed 's|https://||g'):$PROJECT.git"
