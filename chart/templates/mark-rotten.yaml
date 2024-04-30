@@ -21,10 +21,10 @@ spec:
                   name: {{ .Values.gitlab.secret }}
                   key: token
             - name: ROTTEN_AFTER
-              value: {{ .Values.plugins.rotten.mark_after }}
+              value: "{{ .Values.plugins.rotten.mark_after }}"
             - name: ROTTEN_LABEL
               value: {{ .Values.plugins.rotten.label }}
             - name: PROJECTS
               value: {{ .Values.projects | join "," }}
-            command: /jobs/mark-rotten.py
+            command: ["/jobs/mark-rotten.py"]
           restartPolicy: Never
