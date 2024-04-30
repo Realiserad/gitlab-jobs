@@ -14,13 +14,13 @@ REPORTER_ACCESS_LEVEL = 20
 
 def get_groups():
     return json.loads(requests.get(
-        url=f"https://{GITLAB_BASE_URL}/api/v4/groups",
+        url=f"{GITLAB_BASE_URL}/api/v4/groups",
         headers={"PRIVATE-TOKEN": GITLAB_API_TOKEN}).text)
 
 
 def get_members(group_id, min_access_level):
     members = json.loads(requests.get(
-        url=f"https://{GITLAB_BASE_URL}/api/v4/groups/{group_id}/members",
+        url=f"{GITLAB_BASE_URL}/api/v4/groups/{group_id}/members",
         headers={"PRIVATE-TOKEN": GITLAB_API_TOKEN}).text)
     return [member["username"] for member in members
             if member['access_level'] >= min_access_level]
