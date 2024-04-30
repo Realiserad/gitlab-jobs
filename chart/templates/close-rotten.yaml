@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: close-rotten
+  name: {{ .Chart.Name }}-close-rotten
 spec:
   schedule: "0 18 * * *"
   jobTemplate:
