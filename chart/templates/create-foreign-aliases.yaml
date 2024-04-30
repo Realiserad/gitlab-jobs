@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Chart.Name }}-create-foreign-aliases
+spec:
+  schedule: "0 6 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: create-foreign-aliases
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            env:
+            - name: GITLAB_BASE_URL
+              value: {{ .Values.gitlab.url }}
+            - name: GITLAB_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.gitlab.secret }}
+                  key: token
+            - name: COMMITTER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.gitlab.secret }}
+                  key: username
+            - name: COMMITTER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.gitlab.secret }}
+                  key: email
+            - name: PROJECT
+              value: {{ .Values.plugins.foreignAliases.project }}
+            command:
+            - "/bin/sh"
+            - "-c"
+            - "create-foreign-aliases.sh"
+          restartPolicy: Never

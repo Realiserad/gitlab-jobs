@@ -9,10 +9,13 @@ as a Kubernetes `Job` or `CronJob`.
     Add a bot user in GitLab and [create a personal access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token).
 
 2.
-    Deploy a secret for the personal access token using `kubectl`:
+    Deploy a secret for the bot containing using `kubectl`:
 
     ```shell
-    kubectl create secret generic gitlab-api --from-literal=token=<TOKEN>
+    kubectl create secret generic gitlab-api \
+        --from-literal=username=<USERNAME> \
+        --from-literal=email=<EMAIL> \
+        --from-literal=token=<TOKEN>
     ```
 
 3.
@@ -23,7 +26,7 @@ as a Kubernetes `Job` or `CronJob`.
     Install the Helm chart:
 
     ```shell
-    helm install oci://ghcr.io/realiserad/charts/gitlab-jobs --version 0.1.0 --values values.yaml
+    helm install oci://ghcr.io/realiserad/charts/gitlab-jobs --version 0.2.0 --values values.yaml
     ```
 
 5.
@@ -60,3 +63,16 @@ Close merge requests marked as rotten.
 should be closed, e.g. `owner/repo1,owner/repo2`.
 - `CLOSE_AFTER`: The number of days that a merge request must have been marked
 as rotten before it is closed.
+
+### `create-foreign-aliases`
+
+Creates an `OWNERS_ALIASES` file compatible with
+[Jenkins X foreign aliases](https://jenkins-x.io/blog/2023/02/09/foreign-aliases/)
+from the group permissions on your GitLab instance.
+
+#### Parameters
+
+- `PROJECT`: The name of the project where the `OWNERS_ALIASES` file should be
+  created, e.g. `owner/repo`.
+- `COMMITTER_NAME`: The name of your GitLab bot. Used for commits.
+- `COMMITTER_EMAIL`: The email of your GitLab bot. Used for commits.
