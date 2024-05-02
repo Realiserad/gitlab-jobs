@@ -19,8 +19,5 @@ echo "🤖 Committing OWNERS_ALIASES..."
 git add OWNERS_ALIASES
 git commit -m "chore: update owners aliases"
 
-echo "👁️‍🗨️ Diff is shown below:"
-git diff OWNERS_ALIASES
-
 echo "🚀 Pushing changes (if any)..."
 git push
