@@ -23,6 +23,8 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.gitlab.secret }}
                   key: token
+            - name: REQUESTS_CA_BUNDLE
+              value: /etc/ssl/certs/ca-certificates.crt
             - name: CLOSE_AFTER
               value: "{{ .Values.plugins.rotten.close_after }}"
             - name: ROTTEN_LABEL

@@ -18,6 +18,8 @@ spec:
             env:
             - name: GITLAB_BASE_URL
               value: {{ .Values.gitlab.url }}
+            - name: REQUESTS_CA_BUNDLE
+              value: /etc/ssl/certs/ca-certificates.crt
             - name: GITLAB_API_TOKEN
               valueFrom:
                 secretKeyRef:
