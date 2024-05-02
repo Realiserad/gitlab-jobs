@@ -6,7 +6,7 @@ echo "👷 Collecting foreign aliases from GitLab..."
 /jobs/create-foreign-aliases.py
 
 echo "🐑 Cloning $PROJECT..."
-GIT_CLONE_URI="https://$COMMITTER_NAME:$GITLAB_API_TOKEN@$(echo "$GITLAB_BASE_URL" | sed 's|https://||g'):$PROJECT.git"
+GIT_CLONE_URI="https://$COMMITTER_NAME:$GITLAB_API_TOKEN@$(echo "$GITLAB_BASE_URL" | sed 's|https://||g')/$PROJECT.git"
 git clone --filter=blob:none --branch main --single-branch "$GIT_CLONE_URI" source
 cp OWNERS_ALIASES source
 cd source
