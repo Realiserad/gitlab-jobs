@@ -31,5 +31,5 @@ spec:
               value: {{ .Values.plugins.rotten.label }}
             - name: PROJECTS
               value: {{ .Values.projects | join "," }}
-            command: ["/jobs/mark-rotten.py"]
+            command: ["/jobs/close-rotten.py"]
           restartPolicy: Never
