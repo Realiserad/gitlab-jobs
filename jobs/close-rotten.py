@@ -5,7 +5,7 @@ import os
 import requests
 from datetime import timedelta, datetime
 
-GITLAB_BASE_URL = os.environ['BASE_URL']
+GITLAB_BASE_URL = os.environ['GITLAB_BASE_URL']
 GITLAB_API_TOKEN = os.environ['GITLAB_API_TOKEN']
 ROTTEN_LABEL = os.environ['ROTTEN_LABEL']
 CLOSE_AFTER = int(os.environ['CLOSE_AFTER'])
