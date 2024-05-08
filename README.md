@@ -26,7 +26,7 @@ as a Kubernetes `Job` or `CronJob`.
     Install the Helm chart:
 
     ```shell
-    helm install oci://ghcr.io/realiserad/charts/gitlab-jobs --version 0.3.1 --values values.yaml
+    helm install oci://ghcr.io/realiserad/charts/gitlab-jobs --version 0.3.2 --values values.yaml
     ```
 
 5.
