@@ -17,7 +17,7 @@ git config --global user.name "$COMMITTER_NAME"
 
 echo "🤖 Committing OWNERS_ALIASES..."
 git add OWNERS_ALIASES
-git commit -m "chore: update owners aliases"
+git commit -m "chore: update owners aliases" || true
 
 echo "🚀 Pushing changes (if any)..."
 git push
