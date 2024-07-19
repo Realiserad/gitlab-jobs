@@ -22,8 +22,15 @@ def get_members(group_id, min_access_level):
     members = json.loads(requests.get(
         url=f"{GITLAB_BASE_URL}/api/v4/groups/{group_id}/members",
         headers={"PRIVATE-TOKEN": GITLAB_API_TOKEN}).text)
-    return [member["username"] for member in members
-            if member['access_level'] >= min_access_level]
+    output = []
+    for member in members:
+        if type(member) is not dict:
+            print(
+                f"Skipping garbage data of type {type(member)}: {member}.")
+            continue
+        if member.get('access_level') >= min_access_level:
+            output.append(member.get('username'))
+    return output
 
 
 def normalize(name):
