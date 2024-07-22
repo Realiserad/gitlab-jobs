@@ -1,7 +1,8 @@
+{{ if .Values.plugins.rotten.enabled }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ .Chart.Name }}-close-rotten
+  name: {{ .Values.name | default .Chart.Name }}-close-rotten
 spec:
   schedule: "0 18 * * *"
   jobTemplate:
@@ -10,7 +11,7 @@ spec:
       template:
         metadata:
           labels:
-            app: {{ .Chart.Name }}
+            app: {{ .Values.name | default .Chart.Name }}
         spec:
           containers:
           - name: close-rotten
@@ -34,3 +35,4 @@ spec:
               value: {{ .Values.projects | join "," }}
             command: ["/jobs/close-rotten.py"]
           restartPolicy: Never
+{{ end }}

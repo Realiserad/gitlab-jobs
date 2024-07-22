@@ -20,13 +20,14 @@ as a Kubernetes `Job` or `CronJob`.
 
 3.
     Customise [the `values.yaml`](https://github.com/Realiserad/gitlab-jobs/blob/main/chart/values.yaml)
-    according to your needs. You probably want to adjust `gitlab.url` and `projects`.
+    according to your needs. You probably want to adjust thre parameters `gitlab.url`
+    and `projects` and enable one or more plugins.
 
 4.
     Install the Helm chart:
 
     ```shell
-    helm install oci://ghcr.io/realiserad/charts/gitlab-jobs --version 0.3.2 --values values.yaml
+    helm install oci://ghcr.io/realiserad/charts/gitlab-jobs --version 0.4.0 --values values.yaml
     ```
 
 5.
@@ -48,7 +49,7 @@ as rotten.
 
 #### Parameters
 
-- `$ROTTEN_AFTER`: The number of days that a merge request must have been
+- `ROTTEN_AFTER`: The number of days that a merge request must have been
 inactive before it is marked as rotten.
 - `PROJECTS`: A comma-separated list of projects to search for rotten merge
 requests, e.g. `owner/repo1,owner/repo2`.

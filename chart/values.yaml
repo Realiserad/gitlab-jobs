@@ -1,3 +1,4 @@
+name: gitlab-jobs
 image:
   repository: ghcr.io/realiserad/gitlab-jobs
   tag: latest
@@ -9,8 +10,10 @@ projects:
 - devops/jx3
 plugins:
   rotten:
+    enabled: false
     mark_after: 7
     close_after: 3
     label: rotten
   foreignAliases:
+    enabled: false
     project: devops/jx3-pipeline-catalog

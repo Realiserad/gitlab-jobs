@@ -1,7 +1,8 @@
+{{ if .Values.plugins.foreignAliases.enabled }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ .Chart.Name }}-create-foreign-aliases
+  name: {{ .Values.name | default .Chart.Name }}-create-foreign-aliases
 spec:
   schedule: "0 6 * * *"
   jobTemplate:
@@ -10,7 +11,7 @@ spec:
       template:
         metadata:
           labels:
-            app: {{ .Chart.Name }}
+            app: {{ .Values.name | default .Chart.Name }}
         spec:
           containers:
           - name: create-foreign-aliases
@@ -43,3 +44,4 @@ spec:
             - "-c"
             - "/jobs/create-foreign-aliases.sh"
           restartPolicy: Never
+{{ end }}
